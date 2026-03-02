@@ -89,8 +89,8 @@
 	depends = qtbase
 	recommends = qtdeclarative
 	path = qtsensors
-	url = ../../qt/qtsensors.git
-	branch = 5.15
+	url = ../qtsensors.git
+	branch = Astraeus
 	status = addon
 [submodule "qtsystems"]
 	depends = qtbase

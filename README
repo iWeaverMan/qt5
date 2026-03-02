@@ -1,134 +1,84 @@
-HOW TO BUILD QT5
-================
+```
+/*****************************
 
+       8000000000000008       
+      000000000000000000      
+     00000000000000000000     
+    0000000        0000000    
+   000000  00000000  000000   
+  000000 800000000865 800000  
+ 800000  60000000       00008 
+ 800008        000006  000008 
+  000  8 568000000000 000000  
+   000000  00000000  000000   
+    0000000        0000000    
+     00000000000000000000     
+      000000000000000000      
+       8000000000000008 
 
- Synopsis
- ========
+         Qt for build 
+   Astraeus native library
 
-   System requirements
-   ------------------
+*****************************/
+```
 
-    - Perl 5.8 or later
-    - Python 2.7 or later
-    - C++ compiler supporting the C++11 standard
+MacOS
+=====
 
-     For other platform specific requirements,
-     please see section "Setting up your machine" on:
-     http://wiki.qt.io/Get_The_Source
+1. Install Homebrew
+-------------------
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-   Licensing:
-   ----------
+2. Install JDK
+--------------
+    brew install openjdk@17
 
-    Opensource users:
+    sudo ln -sfn /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk \
+        /Library/Java/JavaVirtualMachines/openjdk.jdk
 
-        <license>        = -opensource
+    export JAVA_HOME=$(/usr/libexec/java_home -v 17) 
+    export PATH=$JAVA_HOME/bin:$PATH
 
-    Commercial users:
+If you need to have openjdk first in your PATH run: 
 
-        <license>        = -commercial
+    echo 'export JAVA_HOME=$(/usr/libexec/java_home -v 17)' >> ~/.zprofile
+    echo 'export PATH=$JAVA_HOME/bin:$PATH' >> ~/.zprofile
 
-   Linux, Mac:
-   -----------
+3. Install Android SDK and NDK
+------------------------------
+    brew install --cask android-commandlinetools
+    brew install --cask android-platform-tools
+    sdkmanager "platform-tools" "platforms;android-35" "ndk;29.0.14206865" "build-tools;35.0.0"
+Read terms and conditions
 
-     cd <path>/<source_package>
-     ./configure -prefix $PWD/qtbase <license> -nomake tests
-     make -j 4
+    January 16, 2019
+    ---------------------------------------
+    Accept? (y/N):
 
-   Windows:
-   --------
+Set ANDROID_SDK_ROOT
 
-     Open a command prompt.
-     Ensure that the following tools can be found in the path:
-     * Supported compiler (Visual Studio 2012 or later,
-        MinGW-builds gcc 4.9 or later)
-     * Perl version 5.12 or later   [http://www.activestate.com/activeperl/]
-     * Python version 2.7 or later  [http://www.activestate.com/activepython/]
-     * Ruby version 1.9.3 or later  [http://rubyinstaller.org/]
+    export ANDROID_SDK_ROOT="/opt/homebrew/share/android-commandlinetools"
 
-     cd <path>\<source_package>
-     configure -prefix %CD%\qtbase <license> -nomake tests
-     nmake // jom // mingw32-make
+Set ANDROID_NDK_ROOT
 
-     To accelerate the bootstrap of qmake with MSVC, it may be useful to pass
-     "-make-tool jom" on the configure command line. If you do not use jom,
-     adding "/MP" to the CL environment variable is a good idea.
+    export ANDROID_NDK_ROOT="$ANDROID_SDK_ROOT/ndk/29.0.14206865"
 
- More details follow.
+4. Download
+-----------
 
- Build!
- ======
+    git clone https://github.com/iWeaverMan/qt5
+    cd qt5
+    git submodule update --init --recursive
 
- A typical `configure; make' build process is used.
+5. Build
+--------
 
- Some relevant configure options (see configure -help):
+    build-android.sh
+    build-ios-arm64.sh
+    build-ios-simulator-arm64.sh.sh
+    build-ios-simulator-x64.sh
+    build-mac-arm64.sh
+    build-mac-x64.sh
 
- -release              Compile and link Qt with debugging turned off.
- -debug                Compile and link Qt with debugging turned on.
- -nomake tests         Disable building of tests to speed up compilation
- -nomake examples      Disable building of examples to speed up compilation
- -confirm-license      Automatically acknowledge the LGPL 2.1 license.
-
- Example for a release build:
- (adjust the `-jN' parameter as appropriate for your system)
-
-   ./configure -prefix $PWD/qtbase <license>
-   make -j4
-
- Example for a developer build:
- (enables more autotests, builds debug version of libraries, ...)
-
-   ./configure -developer-build <license>
-   make -j4
-
- See output of `./configure -help' for documentation on various options to
- configure.
-
- The above examples will build whatever Qt5 modules have been enabled by
- default in the build system.
-
- It is possible to build selected modules with their dependencies by doing
- a `make module-<foo>'.  For example, to build only qtdeclarative,
- and the modules it depends on:
-
-   ./configure -prefix $PWD/qtbase <license>
-   make -j4 module-qtdeclarative
-
- This can save a lot of time if you are only interested in a subset of Qt5.
-
-
- Hints
- =====
-
- The submodule repository qtrepotools contains useful scripts for
- developers and release engineers. Consider adding qtrepotools/bin
- to your PATH environment variable to access them.
-
- The qt5_tool in qtrepotools has some more features which may be of interest.
- Try `qt5_tool --help'.
-
-
- Building Qt5 from git
- =====================
- See http://wiki.qt.io/Building_Qt_5_from_Git and README.git
- for more information.
- See http://wiki.qt.io/Qt_5 for the reference platforms.
-
-
- Documentation
- =============
-
- After configuring and compiling Qt, building the documentation is possible by running
- "make docs".
-
- After having built the documentation, you need to install it with the following
- command:
-
-    make install_docs
-
- The documentation is installed in the path set to $QT_INSTALL_DOCS.
- Running "qmake -query" will list the value of QT_INSTALL_DOCS.
-
- Information about Qt 5's documentation is located in qtbase/doc/README
- or in the following page: http://wiki.qt.io/Qt5DocumentationProject
-
- Note: Building the documentation is only tested on desktop platforms.
+Windows
+=======
