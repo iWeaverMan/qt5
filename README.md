@@ -25,27 +25,21 @@
 MacOS
 =====
 
-1. Install Homebrew
--------------------
+#### 1. Install Homebrew
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-2. Install JDK
---------------
+#### 2. Install JDK
     brew install openjdk@17
 
     sudo ln -sfn /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk \
         /Library/Java/JavaVirtualMachines/openjdk.jdk
 
+##### Set environment
+
     export JAVA_HOME=$(/usr/libexec/java_home -v 17) 
     export PATH=$JAVA_HOME/bin:$PATH
 
-If you need to have openjdk first in your PATH run: 
-
-    echo 'export JAVA_HOME=$(/usr/libexec/java_home -v 17)' >> ~/.zprofile
-    echo 'export PATH=$JAVA_HOME/bin:$PATH' >> ~/.zprofile
-
-3. Install Android SDK and NDK
-------------------------------
+#### 3. Install Android SDK and NDK
     brew install --cask android-commandlinetools
     brew install --cask android-platform-tools
     sdkmanager "platform-tools" "platforms;android-35" "ndk;29.0.14206865" "build-tools;35.0.0"
@@ -55,30 +49,44 @@ Read terms and conditions
     ---------------------------------------
     Accept? (y/N):
 
-Set ANDROID_SDK_ROOT
+##### Set environment
 
     export ANDROID_SDK_ROOT="/opt/homebrew/share/android-commandlinetools"
-
-Set ANDROID_NDK_ROOT
-
     export ANDROID_NDK_ROOT="$ANDROID_SDK_ROOT/ndk/29.0.14206865"
 
-4. Download
------------
+#### 4. Xcode
+Install Xcode Version 26.0 (17A324)
 
+#### 5. Download
     git clone https://github.com/iWeaverMan/qt5
     cd qt5
     git submodule update --init --recursive
 
-5. Build
---------
-
-    build-android.sh
-    build-ios-arm64.sh
-    build-ios-simulator-arm64.sh.sh
-    build-ios-simulator-x64.sh
-    build-mac-arm64.sh
-    build-mac-x64.sh
+#### 6. Build
+    ./build-android.sh
+    ./build-ios-arm64.sh
+    ./build-ios-simulator-arm64.sh.sh
+    ./build-ios-simulator-x64.sh
+    ./build-mac-arm64.sh
+    ./build-mac-x64.sh
 
 Windows
 =======
+
+#### 1. Install Git
+Download https://gitforwindows.org and run the installer.
+
+#### 2. Install Visual Studio Community 2022
+Download https://visualstudio.microsoft.com/ru/vs/community/ and run the installer.
+Install:
+    - MSVC version 143 - VS 2022 C+ x64/х86
+    - Windows 11 SDK (10.0.22621.0)
+
+#### 3. Download
+    git clone https://github.com/iWeaverMan/qt5
+    cd qt5
+    git submodule update --init --recursive
+
+#### 4. Build
+    build-win-x64.bat
+    build-win-x86.bat
