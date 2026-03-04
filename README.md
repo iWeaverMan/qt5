@@ -79,8 +79,8 @@ Download https://gitforwindows.org and run the installer.
 #### 2. Install Visual Studio Community 2022
 Download https://visualstudio.microsoft.com/ru/vs/community/ and run the installer.
 Install:
-    - MSVC version 143 - VS 2022 C+ x64/х86
-    - Windows 11 SDK (10.0.22621.0)
+- MSVC version 143 - VS 2022 C+ x64/х86
+- Windows 11 SDK (10.0.22621.0)
 
 #### 3. Download
     git clone https://github.com/iWeaverMan/qt5
