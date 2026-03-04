@@ -65,7 +65,7 @@ Install Xcode Version 26.0 (17A324)
 #### 6. Build
     ./build-android.sh
     ./build-ios-arm64.sh
-    ./build-ios-simulator-arm64.sh.sh
+    ./build-ios-simulator-arm64.sh
     ./build-ios-simulator-x64.sh
     ./build-mac-arm64.sh
     ./build-mac-x64.sh
