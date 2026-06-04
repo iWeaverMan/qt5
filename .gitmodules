@@ -228,8 +228,8 @@
 	depends = qtdeclarative
 	recommends = qtwebengine
 	path = qtwebview
-	url = ../../qt/qtwebview.git
-	branch = 5.15
+	url = ../qtwebview.git
+	branch = Astraeus
 	status = addon
 [submodule "qtquickcontrols2"]
 	depends = qtgraphicaleffects
